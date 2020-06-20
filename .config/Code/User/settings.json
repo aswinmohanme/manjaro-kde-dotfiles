@@ -1262,7 +1262,7 @@
         }
     ],
     // --- Editing 
-    "editor.fontFamily": "Iosevka Term Slab Medium",
+    "editor.fontFamily": "Iosevka Term Slab",
     "editor.fontWeight": "500",
     "git.enableSmartCommit": true,
     "editor.formatOnSave": true,
@@ -1291,7 +1291,6 @@
     "terminal.integrated.rendererType": "dom",
     "latex-workshop.view.pdf.viewer": "tab",
     "workbench.colorTheme": "Core (Dark)",
-    "editor.fontSize": 13,
     "workbench.activityBar.visible": false,
     "workbench.list.automaticKeyboardNavigation": false
 }
