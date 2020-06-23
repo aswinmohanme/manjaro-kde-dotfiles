@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
      racket
      ruby-on-rails
      syntax-checking
+     selectric
      theming
      vue
      yaml
@@ -73,8 +74,10 @@ This function should only modify configuration layer settings."
            html-enable-lsp t)
 
      (javascript :variables
-                 js2-strict-missing-semi-warning nil
-                 javascript-disable-tern-port-files nil)
+                 javascript-backend 'lsp
+                 javascript-fmt-tool 'prettier
+                 javascript-fmt-on-save t
+                 javascript-import-tool 'import-js)
 
      (lsp :variables
           lsp-enable-file-watchers nil
@@ -269,7 +272,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Iosevka Term Slab"
-                               :size 14
+                               :size 13
                                :weight semibold
                                :width normal)
 
@@ -513,6 +516,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
            (org-level-3 :height 1.0)
            (org-level-4 :height 1.0)
            (org-level-5 :height 1.0))))
+  (add-to-list 'exec-path "/home/aswinmohanme/.asdf/installs/nodejs/*/.npm/bin" t)
   )
 
 (defun dotspacemacs/user-load ()
