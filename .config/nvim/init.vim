@@ -4,7 +4,8 @@
 " An awesome minimal neovim config built over time.
 
 " ==============================
-" PLUGIN MANAGER ==============================
+" PLUGIN MANAGER 
+" ==============================
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged' Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
@@ -16,11 +17,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'wakatime/vim-wakatime'
 
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
+Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'morhetz/gruvbox'
 
@@ -34,7 +37,7 @@ call plug#end()
 let mapleader="\<Space>" 
 
 set hidden
-set nowrap
+"set nowrap
 set encoding=utf-8
 set fileencoding=utf-8
 set iskeyword+=-
@@ -76,40 +79,6 @@ syntax off
 set nohlsearch
 set t_Co=256 
 
-
-" =====================
-" MAPPING
-" =====================
-" Use alt + hjkl to resize windows
-nnoremap <M-j>    :resize -2<CR>
-nnoremap <M-k>    :resize +2<CR>
-nnoremap <M-h>    :vertical resize -2<CR>
-nnoremap <M-l>    :vertical resize +2<CR
-
-" Easy CAPS
-inoremap <c-u> <ESC>viwUi
-nnoremap <c-u> viwU<Esc>
-
-" TAB in general mode will move to text buffer
-nnoremap <leader><TAB> :bnext<CR>
-" SHIFT-TAB will go back
-nnoremap <leader><S-TAB> :bprevious<CR>
-
-" Better tabbing
-vnoremap < <gv
-vnoremap > >gv
-
-" Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-nnoremap <Leader>o o<Esc>^Da
-nnoremap <Leader>O O<Esc>^Da
-
-" Exit from Terminal mode while pressing
-:tnoremap <Esc> <C-\><C-n>
 
 " =====================
 " PLUGIN CONFIG
@@ -198,12 +167,13 @@ function! ShowDocIfNoDiagnostic(timer_id)
   endif
 endfunction
 
-function! s:show_hover_doc()
-  call timer_start(500, 'ShowDocIfNoDiagnostic')
-endfunction
+" Show Documentation on cursor hover
+" function! s:show_hover_doc()
+"  call timer_start(500, 'ShowDocIfNoDiagnostic')
+" endfunction
 
-autocmd CursorHoldI * :call <SID>show_hover_doc()
-autocmd CursorHold * :call <SID>show_hover_doc()
+" autocmd CursorHoldI * :call <SID>show_hover_doc()
+" autocmd CursorHold * :call <SID>show_hover_doc()
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -284,5 +254,120 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Setup Coc Extensions
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
-  \ 'coc-json'
+  \ 'coc-json',
+  \ 'coc-flutter'
 \ ]
+
+" Scroll on Preview Window using Arrow Keys
+function! s:coc_float_scroll(forward) abort
+  let float = coc#util#get_float()
+  if !float | return '' | endif
+  let buf = nvim_win_get_buf(float)
+  let buf_height = nvim_buf_line_count(buf)
+  let win_height = nvim_win_get_height(float)
+  if buf_height < win_height | return '' | endif
+  let pos = nvim_win_get_cursor(float)
+  if a:forward
+    if pos[0] == 1
+      let pos[0] += 3 * win_height / 4
+    elseif pos[0] + win_height / 2 + 1 < buf_height
+      let pos[0] += win_height / 2 + 1
+    endif
+    let pos[0] = pos[0] < buf_height ? pos[0] : buf_height
+  else
+    if pos[0] == buf_height
+      let pos[0] -= 3 * win_height / 4
+    elseif pos[0] - win_height / 2 + 1  > 1
+      let pos[0] -= win_height / 2 + 1
+    endif
+    let pos[0] = pos[0] > 1 ? pos[0] : 1
+  endif
+  call nvim_win_set_cursor(float, pos)
+  return ''
+endfunction
+
+nnoremap <silent><expr> <down> coc#util#has_float() ? coc#util#float_scroll(1) : "\<down>"
+nnoremap <silent><expr> <up> coc#util#has_float() ? coc#util#float_scroll(0) : "\<up>"
+inoremap <silent><expr> <down> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<down>"
+inoremap <silent><expr> <up> coc#util#has_float() ? <SID>coc_float_scroll(0) : "\<up>"
+vnoremap <silent><expr> <down> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<down>"
+vnoremap <silent><expr> <up> coc#util#has_float() ? <SID>coc_float_scroll(0) : "\<up>"
+
+" NETRW
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_winsize=25
+
+" =====================
+" MAPPING
+" =====================
+" Use alt + hjkl to resize windows
+nnoremap <M-j>    :resize -2<CR>
+nnoremap <M-k>    :resize +2<CR>
+nnoremap <M-h>    :vertical resize -2<CR>
+nnoremap <M-l>    :vertical resize +2<CR
+
+" Easy CAPS
+inoremap <c-u> <ESC>viwUi
+nnoremap <c-u> viwU<Esc>
+
+" TAB in general mode will move to text buffer
+nnoremap <leader><TAB> :bnext<CR>
+" SHIFT-TAB will go back
+nnoremap <leader><S-TAB> :bprevious<CR>
+
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap <Leader>o o<Esc>^Da
+nnoremap <Leader>O O<Esc>^Da
+
+" Exit from Terminal mode while pressing
+:tnoremap <Esc> <C-\><C-n>
+
+" Buffer Management
+:nnoremap <leader>bb :buffers<CR>:buffer<Space>
+:nnoremap <leader>bd :bd<CR>
+
+" Window Mangement
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wh <C-w>h
+nnoremap <jeader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+
+nnoremap <leader>w/ :vs<CR>
+nnoremap <leader>w- :s<CR>
+nnoremap <leader>wd :q<CR>
+
+" File Mangement
+nnoremap <leader>pf :Files<CR>
+nnoremap <leader>fr :History<CR>
+
+" Toggle Netrw
+let g:NetrwIsOpen=0
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+nnoremap <leader>pt :call ToggleNetrw()<CR>
+
+" Setup Git
+nnoremap <leader>gs :Git<CR>
+
+" Open Config File
+nnoremap <leader>fed :e ~/.config/nvim/init.vim<CR>
+
+" Open Terminal
+nnoremap <leader>' :term<CR>
