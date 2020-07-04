@@ -19,6 +19,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'wakatime/vim-wakatime'
 
 Plug 'mxw/vim-jsx'
@@ -36,8 +38,8 @@ call plug#end()
 " =====================
 let mapleader="\<Space>" 
 
-set hidden
-"set nowrap
+" set hidden
+" set nowrap
 set encoding=utf-8
 set fileencoding=utf-8
 set iskeyword+=-
@@ -195,8 +197,8 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a v<Plug>(coc-codeaction-selected)
+nmap <leader>a v<Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -235,7 +237,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.

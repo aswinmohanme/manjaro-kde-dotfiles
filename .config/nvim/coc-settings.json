@@ -8,5 +8,6 @@
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
-  "suggest.enablePreview": true
+  "suggest.enablePreview": true,
+  "flutter.provider.hot-reload": true
 }
