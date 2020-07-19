@@ -28,6 +28,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'morhetz/gruvbox'
+Plug 'iCyMind/NeoSolarized'
 
 " Initialize plugin system
 call plug#end()
@@ -81,6 +82,8 @@ syntax off
 set nohlsearch
 set t_Co=256 
 
+" BACKGROUND COLOR
+hi Normal guibg=NONE ctermbg=NONE
 
 " =====================
 " PLUGIN CONFIG
@@ -257,7 +260,9 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-json',
-  \ 'coc-flutter'
+  \ 'coc-flutter',
+  \ 'coc-python',
+  \ 'coc-texlab'
 \ ]
 
 " Scroll on Preview Window using Arrow Keys
@@ -314,7 +319,7 @@ inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<Esc>
 
 " TAB in general mode will move to text buffer
-nnoremap <leader><TAB> :bnext<CR>
+nnoremap <leader><TAB> <C-^>
 " SHIFT-TAB will go back
 nnoremap <leader><S-TAB> :bprevious<CR>
 

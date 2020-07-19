@@ -1292,5 +1292,7 @@
     "latex-workshop.view.pdf.viewer": "tab",
     "workbench.colorTheme": "Core (Dark)",
     "workbench.activityBar.visible": false,
-    "workbench.list.automaticKeyboardNavigation": false
+    "workbench.list.automaticKeyboardNavigation": false,
+    "editor.fontSize": 13,
+    "window.zoomLevel": 0
 }
