@@ -28,7 +28,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'morhetz/gruvbox'
-Plug 'iCyMind/NeoSolarized'
 
 " Initialize plugin system
 call plug#end()
@@ -340,11 +339,11 @@ nnoremap <Leader>O O<Esc>^Da
 " Window Mangement
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>wh <C-w>h
-nnoremap <jeader>wj <C-w>j
+nnoremap <leader>wj <C-w>j
 nnoremap <leader>wk <C-w>k
 
 nnoremap <leader>w/ :vs<CR>
-nnoremap <leader>w- :s<CR>
+nnoremap <leader>w- :split<CR>
 nnoremap <leader>wd :q<CR>
 
 " File Mangement
