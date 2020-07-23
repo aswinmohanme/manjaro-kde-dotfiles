@@ -81,6 +81,7 @@ This function should only modify configuration layer settings."
 
      (lsp :variables
           lsp-enable-file-watchers nil
+          lsp-ui-sideline-enable nil
           lsp-ui-doc-enable nil)
 
      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -250,8 +251,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(minimal-light
-                         minimal
+   dotspacemacs-themes '(minimal
+                         minimal-light
                          base16-material
                          spacemacs-dark
                          spacemacs-light)
@@ -271,8 +272,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Iosevka Term Slab"
-                               :size 14
+   dotspacemacs-default-font '("Iosevka Term"
+                               :size 13
                                :weight semibold
                                :width normal)
 

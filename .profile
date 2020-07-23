@@ -1,6 +1,9 @@
 # PATH
 export PATH="/home/aswinmohanme/.local/bin:$PATH"
 
+# RUST
+export PATH="/home/aswinmohanme/.cargo/bin:$PATH"
+
 # FLUTTER
 export FLUTTER_HOME="/mnt/DevEnv/Flutter"
 export PATH="$FLUTTER_HOME/flutter/bin/cache/dart-sdk/bin:$PATH"

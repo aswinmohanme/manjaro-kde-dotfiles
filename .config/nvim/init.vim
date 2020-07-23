@@ -49,8 +49,6 @@ set smarttab
 set expandtab
 set smartindent
 set autoindent
-set nobackup
-set nowritebackup
 set updatetime=300
 set timeoutlen=500
 set formatoptions-=cro
@@ -347,6 +345,7 @@ nnoremap <leader>w- :split<CR>
 nnoremap <leader>wd :q<CR>
 
 " File Mangement
+set rtp+=/usr/bin/fzf
 nnoremap <leader>pf :Files<CR>
 nnoremap <leader>fr :History<CR>
 
