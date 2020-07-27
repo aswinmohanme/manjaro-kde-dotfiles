@@ -50,6 +50,7 @@ This function should only modify configuration layer settings."
      markdown
      racket
      ruby-on-rails
+     scheme
      syntax-checking
      selectric
      theming
@@ -117,8 +118,10 @@ This function should only modify configuration layer settings."
      (vue :variables
           vue-backend 'lsp)
 
-     (wakatime :variables
-               wakatime-api-key "94fdd21d-bcaf-466e-88c9-678f45911037")
+     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     ;; (wakatime :variables                                               ;;
+     ;;           wakatime-api-key "0edb3164-d597-4d1b-9b66-be13dfb620d2") ;;
+     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
      )
 
    ;; List of additional packages that will be installed without being
@@ -578,6 +581,10 @@ before packages are loaded."
   ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
   (add-hook 'elixir-mode-hook
             (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
+  ;; Setup Scheme
+  (setq geiser-chicken-binary "chicken-csi")
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-scheme-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

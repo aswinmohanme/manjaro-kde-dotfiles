@@ -26,6 +26,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'wlangstroth/vim-racket'
 
 Plug 'morhetz/gruvbox'
 
